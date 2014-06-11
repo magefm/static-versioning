@@ -2,7 +2,7 @@
 <config>
     <modules>
         <MageFM_Correios>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </MageFM_Correios>
     </modules>
     <global>
@@ -13,5 +13,12 @@
                 </rewrite>
             </page>
         </blocks>
+        <models>
+            <core>
+                <rewrite>
+                    <design_package>MageFM_StaticVersioning_Model_Core_Design_Package</design_package>
+                </rewrite>
+            </core>
+        </models>
     </global>
 </config>
