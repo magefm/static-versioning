@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <MageFM_Correios>
+        <MageFM_StaticVersioning>
             <version>1.0.1</version>
-        </MageFM_Correios>
+        </MageFM_StaticVersioning>
     </modules>
     <global>
         <blocks>
