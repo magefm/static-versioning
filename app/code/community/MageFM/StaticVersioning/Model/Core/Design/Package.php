@@ -27,7 +27,8 @@ class MageFM_StaticVersioning_Model_Core_Design_Package extends Mage_Core_Model_
                 $files, $targetDir . DS . $targetFilename, false, array($this, 'beforeMergeCss'), 'css'
         );
         if ($mergeFilesResult) {
-            return $baseMediaUrl . $mergerDir . '/' . $targetFilename . '?v=' . md5_file($targetDir . DS . $targetFilename);
+            $filePath = $targetDir . DS . $targetFilename;
+            return $baseMediaUrl . $mergerDir . '/' . $targetFilename . (file_exists($filePath) ? '?v=' . md5_file($filePath) : '');
         }
         return '';
     }
@@ -40,7 +41,8 @@ class MageFM_StaticVersioning_Model_Core_Design_Package extends Mage_Core_Model_
             return '';
         }
         if ($this->_mergeFiles($files, $targetDir . DS . $targetFilename, false, null, 'js')) {
-            return Mage::getBaseUrl('media', Mage::app()->getRequest()->isSecure()) . 'js/' . $targetFilename . '?v=' . md5_file($targetDir . DS . $targetFilename);
+            $filePath = $targetDir . DS . $targetFilename;
+            return Mage::getBaseUrl('media', Mage::app()->getRequest()->isSecure()) . 'js/' . $targetFilename . (file_exists($filePath) ? '?v=' . md5_file($filePath) : '');
         }
         return '';
     }

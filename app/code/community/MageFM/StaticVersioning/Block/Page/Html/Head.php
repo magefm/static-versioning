@@ -15,14 +15,16 @@ class MageFM_StaticVersioning_Block_Page_Html_Head extends Mage_Page_Block_Html_
         // get static files from the js folder, no need in lookups
         foreach ($staticItems as $params => $rows) {
             foreach ($rows as $name) {
-                $items[$params][] = $mergeCallback ? Mage::getBaseDir() . DS . 'js' . DS . $name : $baseJsUrl . $name . '?v=' . md5_file(Mage::getBaseDir() . DS . 'js' . DS . $name);
+                $filePath = Mage::getBaseDir() . DS . 'js' . DS . $name;
+                $items[$params][] = $mergeCallback ? Mage::getBaseDir() . DS . 'js' . DS . $name : $baseJsUrl . $name . (file_exists($filePath) ? '?v=' . md5_file($filePath) : '');
             }
         }
 
         // lookup each file basing on current theme configuration
         foreach ($skinItems as $params => $rows) {
             foreach ($rows as $name) {
-                $items[$params][] = $mergeCallback ? $designPackage->getFilename($name, array('_type' => 'skin')) : $designPackage->getSkinUrl($name, array()) . '?v=' . md5_file($designPackage->getFilename($name, array('_type' => 'skin')));
+                $filePath = $designPackage->getFilename($name, array('_type' => 'skin'));
+                $items[$params][] = $mergeCallback ? $designPackage->getFilename($name, array('_type' => 'skin')) : $designPackage->getSkinUrl($name, array()) . (file_exists($filePath) ? '?v=' . md5_file($filePath) : '');
             }
         }
 
